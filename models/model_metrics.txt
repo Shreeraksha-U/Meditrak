@@ -1,0 +1,7 @@
+Meditrak Demand Forecasting
+===========================
+
+MAE      : 7.81
+MSE      : 81.55
+RMSE     : 9.03
+R² Score : 0.6845
