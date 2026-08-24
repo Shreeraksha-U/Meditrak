@@ -5,7 +5,7 @@ from predict import predict_demand
 
 st.set_page_config(
     page_title="Meditrak Demand Forecasting",
-    page_icon="🏥",
+    page_icon="M",
     layout="wide"
 )
 
@@ -16,15 +16,27 @@ st.write(
 
 df = pd.read_csv("dataset/medicine_sales_processed.csv")
 
+store_mapping = {
+    "Apollo Pharmacy": "S001",
+    "MedPlus": "S002",
+    "Wellness Forever": "S003",
+    "HealthCare Pharmacy": "S004",
+    "LifeCare Pharmacy": "S005",
+    "City Pharmacy": "S006",
+    "MediCare Pharmacy": "S007",
+    "Good Health Pharmacy": "S008",
+    "CarePlus Pharmacy": "S009",
+    "Prime Pharmacy": "S010"
+}
 left, right = st.columns(2)
 
 with left:
 
-    store = st.selectbox(
+    store_name = st.selectbox(
         "Store",
-        sorted(df["Store_ID"].unique())
+        list(store_mapping.keys())
     )
-
+    store = store_mapping[store_name]
     medicine = st.selectbox(
         "Medicine",
         sorted(df["Medicine_Name"].unique())
@@ -93,15 +105,16 @@ if st.button("Predict Demand"):
             "Very High Demand\n\nPlace replenishment order immediately."
         )
 
-st.subheader("Model Performance")
 
-with open("models/model_metrics.txt") as f:
+#st.subheader("Model Performance")
 
-    st.code(f.read())
+#with open("models/model_metrics.txt") as f:
 
-st.subheader("Actual vs Predicted")
+    #st.code(f.read())
 
-st.image(
-    "images/actual_vs_predicted.png",
-    use_container_width=True
-)
+#st.subheader("Actual vs Predicted")
+
+#st.image(
+    #"images/actual_vs_predicted.png",
+    #use_container_width=True
+#)
