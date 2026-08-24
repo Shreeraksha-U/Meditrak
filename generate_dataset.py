@@ -7,8 +7,8 @@ fake = Faker()
 
 #10 pharmacy branches
 stores = [
-    "S001", "S002", "S003", "S004", "S005",
-    "S006", "S007", "S008", "S009", "S010"
+    "Apollo Pharmacy", "SmartMed Pharmacy", "HealthMart", "BMS Pharmacy", "City Medicals",
+    "Clarkson's Pharma", "Chen Drugstore", "Claire Drughouse", "Sara Medicos", "Lakshya Medicals"
 ]
 
 #Medicines
