@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 
 from predict import predict_demand
+from datetime import date
 
 st.set_page_config(
     page_title="Meditrak Demand Forecasting",
@@ -42,7 +43,8 @@ with left:
     )
 
     date = st.date_input(
-        "Select Date"
+        "Select Forecast Date",
+        min_value=date.today()
     )
 
 # GET MEDICINE DETAILS
