@@ -10,53 +10,66 @@ st.set_page_config(
 )
 
 st.title("Meditrak Demand Forecasting")
+
 st.write(
     "Predict future medicine demand using Machine Learning."
 )
 
-df = pd.read_csv("dataset/medicine_sales_processed.csv")
+# LOAD DATASET
 
-store_mapping = {
-    "Apollo Pharmacy": "S001",
-    "MedPlus": "S002",
-    "Wellness Forever": "S003",
-    "HealthCare Pharmacy": "S004",
-    "LifeCare Pharmacy": "S005",
-    "City Pharmacy": "S006",
-    "MediCare Pharmacy": "S007",
-    "Good Health Pharmacy": "S008",
-    "CarePlus Pharmacy": "S009",
-    "Prime Pharmacy": "S010"
-}
+df = pd.read_csv(
+    "dataset/medicine_sales_processed.csv"
+)
+
+# CREATE TWO COLUMNS
+
 left, right = st.columns(2)
+
+
+# LEFT COLUMN
 
 with left:
 
-    store_name = st.selectbox(
+    # Directly use the store names from your dataset
+    store = st.selectbox(
         "Store",
-        list(store_mapping.keys())
+        sorted(df["Store_ID"].unique())
     )
-    store = store_mapping[store_name]
+
     medicine = st.selectbox(
         "Medicine",
         sorted(df["Medicine_Name"].unique())
     )
 
-    date = st.date_input("Select Date")
+    date = st.date_input(
+        "Select Date"
+    )
 
-    row = df[df["Medicine_Name"] == medicine].iloc[0]
+# GET MEDICINE DETAILS
 
-    item_id = row["Item_ID"]
+row = df[
+    df["Medicine_Name"] == medicine
+].iloc[0]
 
-    category = row["Category"]
+item_id = row["Item_ID"]
 
-    price = row["Base_Price"]
+category = row["Category"]
+
+price = row["Base_Price"]
+
+# RIGHT COLUMN
 
 with right:
 
-    promotion = st.checkbox("Promotion")
+    promotion = st.checkbox(
+        "Promotion"
+    )
 
-    holiday = st.checkbox("Holiday")
+    holiday = st.checkbox(
+        "Holiday"
+    )
+
+# CREATE DATE FEATURES
 
 day = date.strftime("%A")
 
@@ -64,7 +77,10 @@ month = date.strftime("%B")
 
 weekend = 1 if date.weekday() >= 5 else 0
 
+# PREDICT BUTTON
+
 if st.button("Predict Demand"):
+
     prediction = predict_demand(
         store,
         item_id,
@@ -76,45 +92,38 @@ if st.button("Predict Demand"):
         day,
         month,
         weekend
-)
-
-    st.success(
-        f"Predicted Demand : {prediction:.0f} Units"
     )
+
+# Show prediction
+    st.success(
+        f"Predicted Demand: {prediction:.0f} Units"
+    )
+
+# DEMAND RECOMMENDATION
     if prediction < 40:
 
         st.warning(
-            "Low Demand\n\nMaintain minimum inventory."
+            "Low Demand\n\n"
+            "Maintain minimum inventory."
         )
 
     elif prediction < 90:
 
         st.info(
-            "Moderate Demand\n\nMaintain regular stock."
+            "Moderate Demand\n\n"
+            "Maintain regular stock."
         )
 
     elif prediction < 140:
 
         st.success(
-            "High Demand\n\nIncrease inventory."
+            "High Demand\n\n"
+            "Increase inventory."
         )
 
     else:
 
         st.error(
-            "Very High Demand\n\nPlace replenishment order immediately."
+            "Very High Demand\n\n"
+            "Place replenishment order immediately."
         )
-
-
-#st.subheader("Model Performance")
-
-#with open("models/model_metrics.txt") as f:
-
-    #st.code(f.read())
-
-#st.subheader("Actual vs Predicted")
-
-#st.image(
-    #"images/actual_vs_predicted.png",
-    #use_container_width=True
-#)
