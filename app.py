@@ -4,11 +4,27 @@ import pandas as pd
 from predict import predict_demand
 from datetime import date
 
+import auth
+import database
+import utils
+
+# INIT DATABASE
+
+database.init_db()
+
 st.set_page_config(
     page_title="Meditrak Demand Forecasting",
     page_icon="M",
     layout="wide"
 )
+
+# AUTH GATE
+# Shows Login / Sign Up tabs until the user is authenticated.
+
+if not auth.auth_gate():
+    st.stop()
+
+auth.logout_button()
 
 st.title("Meditrak Demand Forecasting")
 
@@ -102,30 +118,30 @@ if st.button("Predict Demand"):
     )
 
 # DEMAND RECOMMENDATION
-    if prediction < 40:
 
-        st.warning(
-            "Low Demand\n\n"
-            "Maintain minimum inventory."
-        )
+    level, recommendation, alert_type = utils.categorize_demand(prediction)
 
-    elif prediction < 90:
+    getattr(st, alert_type)(
+        f"{level} Demand\n\n{recommendation}"
+    )
 
-        st.info(
-            "Moderate Demand\n\n"
-            "Maintain regular stock."
-        )
+# SAVE TO PREDICTION HISTORY
 
-    elif prediction < 140:
+    database.save_prediction(
+        username=st.session_state.username,
+        store=store,
+        medicine=medicine,
+        item_id=item_id,
+        category=category,
+        price=float(price),
+        promotion=promotion,
+        holiday=holiday,
+        forecast_date=date.strftime("%Y-%m-%d"),
+        day_of_week=day,
+        month=month,
+        is_weekend=weekend,
+        predicted_units=float(prediction),
+        demand_level=level
+    )
 
-        st.success(
-            "High Demand\n\n"
-            "Increase inventory."
-        )
-
-    else:
-
-        st.error(
-            "Very High Demand\n\n"
-            "Place replenishment order immediately."
-        )
+    st.caption("Saved to your Prediction History (see sidebar pages).")
