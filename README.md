@@ -2,7 +2,7 @@
 
 Meditrak is a machine learning-based medicine demand forecasting system designed to help pharmacies predict future medicine demand and support better inventory planning.
 
-The application uses a **Linear Regression** model to predict the expected number of units sold based on factors such as the store, medicine, price, promotion status, holiday status, and calendar-related features. It now also includes user accounts, a sales/analytics dashboard, saved prediction history, and low-stock inventory alerts.
+The application uses a **Linear Regression** model over 5,000 records to predict the expected number of units sold based on factors such as the store, medicine, price, promotion status, holiday status, and calendar-related features. It now also includes user accounts, a sales/analytics dashboard, saved prediction history, and low-stock inventory alerts.
 
 ## Problem Statement
 
