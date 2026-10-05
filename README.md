@@ -344,3 +344,7 @@ The dataset used in this project is synthetically generated for educational and 
 
 **Shreeraksha**
 AI/ML Internship Project
+
+
+Sneak-peak of Meditrak:
+

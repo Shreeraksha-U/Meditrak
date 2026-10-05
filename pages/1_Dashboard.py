@@ -24,9 +24,7 @@ sales_df = pd.read_csv("dataset/medicine_sales_processed.csv")
 
 predictions_df = database.get_predictions()
 
-# -------------------------------
 # TOP LEVEL METRICS
-# -------------------------------
 
 col1, col2, col3, col4 = st.columns(4)
 
@@ -37,9 +35,7 @@ col4.metric("Predictions Made", f"{len(predictions_df):,}")
 
 st.divider()
 
-# -------------------------------
 # SALES ANALYTICS
-# -------------------------------
 
 left, right = st.columns(2)
 
@@ -93,9 +89,7 @@ st.bar_chart(top_medicines)
 
 st.divider()
 
-# -------------------------------
 # PREDICTION ANALYTICS
-# -------------------------------
 
 st.subheader("Predicted Demand Levels (All Users)")
 
