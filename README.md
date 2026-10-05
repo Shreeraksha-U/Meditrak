@@ -2,7 +2,7 @@
 
 Meditrak is a machine learning-based medicine demand forecasting system designed to help pharmacies predict future medicine demand and support better inventory planning.
 
-The application uses a **Linear Regression** model to predict the expected number of units sold based on factors such as the store, medicine, price, promotion status, holiday status, and calendar-related features. It now also includes user accounts, a sales/analytics dashboard, saved prediction history, and low-stock inventory alerts.
+The application uses a **Linear Regression** model over 5,000 records to predict the expected number of units sold based on factors such as the store, medicine, price, promotion status, holiday status, and calendar-related features. It now also includes user accounts, a sales/analytics dashboard, saved prediction history, and low-stock inventory alerts.
 
 ## Problem Statement
 
@@ -348,3 +348,11 @@ AI/ML Internship Project
 
 Sneak-peak of Meditrak:
 
+<img width="1287" height="545" alt="signup_success" src="https://github.com/user-attachments/assets/80007aba-7db9-4bdb-84e9-85384e6f35be" />
+<img width="1304" height="552" alt="home" src="https://github.com/user-attachments/assets/66d63666-2ff7-48eb-a22c-f9fc9268896e" />
+<img width="1307" height="544" alt="highdemand" src="https://github.com/user-attachments/assets/b2411fda-ed7c-46cf-9733-07bfb35437cc" />
+<img width="1320" height="563" alt="moderatedemand" src="https://github.com/user-attachments/assets/81fcaa81-d19a-41ce-982f-a0f0f52c5469" />
+<img width="1330" height="535" alt="dashboard1" src="https://github.com/user-attachments/assets/caa93f0f-b599-4605-bb00-11bdc206661b" />
+<img width="1338" height="512" alt="dashboard3" src="https://github.com/user-attachments/assets/9a468349-4eb6-431f-8a42-42e5fb06c747" />
+<img width="1329" height="523" alt="pred_history" src="https://github.com/user-attachments/assets/c24e5b8e-386c-4f48-a575-45d1965ceb5d" />
+There's few more features, pull!
